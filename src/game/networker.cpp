@@ -5,7 +5,9 @@
 #include "networker.h"
 
 net::Networker::Networker() {
-	//m_Socket = std::make_unique<Socket>(Socket::Family::INET, Socket::Type::STREAM);
+	SockLibInit();
+
+	m_Socket = new Socket(Socket::Family::INET, Socket::Type::STREAM);
 }
 
 void net::Networker::Update() {

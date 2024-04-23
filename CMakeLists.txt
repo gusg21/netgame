@@ -16,7 +16,18 @@ add_executable(netgame
         "src/game/card.cpp"
         "src/game/card.h"
         "src/game/networker.cpp"
-        "src/game/networker.h" "src/state.h" "src/state.cpp" "src/game.h")
+        "src/game/networker.h" 
+        "src/state.h" 
+        "src/state.cpp" 
+        "src/game.h"
+        "src/game.cpp"
+        "src/renderer.cpp"
+        "src/renderer.h"
+        
+        "src/simplesock/socklib_generic.cpp"
+        "src/simplesock/socklib_win32.cpp"
+        "src/simplesock/pool.cpp"
+ "src/eventqueue.h" "src/eventqueue.cpp")
 
 set(BUILD_EXAMPLE "")
 set(BUILD_EXAMPLES OFF)

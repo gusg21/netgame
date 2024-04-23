@@ -9,9 +9,14 @@ namespace net {
 		void Update();
 		void Draw();
 
+		bool GetValidity() { return m_Valid; }
+		void SetValidity(bool valid) { m_Valid = valid; }
+
 		void AddActor(std::shared_ptr<Actor> actor);
 
 	private:
+		bool m_Valid = false;
+
 		std::vector<std::shared_ptr<Actor>> m_Actors;
 	};
 }

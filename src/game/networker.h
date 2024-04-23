@@ -18,7 +18,7 @@ namespace net {
 
         void Update();
     private:
-        std::unique_ptr<Socket> m_Socket;
+        Socket* m_Socket;
     };
 };
 
