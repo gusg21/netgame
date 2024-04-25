@@ -14,6 +14,9 @@ class State;
 
 class Actor {
 public:
+    Actor() = default;
+    Actor(const Actor& actor) = delete;
+    Actor(Actor&& actor) = delete;
     ~Actor() { std::cout << "Actor Destroyed" << std::endl; }
 
     void SetState(net::State* state) { m_State = state; }
@@ -22,10 +25,13 @@ public:
     virtual void Update() {};
     virtual void Draw(net::Renderer* renderer) {};
 
-    bool IsAlive() { return m_Alive; }
+    bool IsAlive() const { return m_Alive; }
+
+protected:
+    [[nodiscard]] net::State* GetState() { return m_State; }
 
 private:
-    net::State* m_State;
+    net::State* m_State = nullptr;
     bool m_Alive = false;
 };
 } // namespace net

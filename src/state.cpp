@@ -15,7 +15,7 @@ void net::State::HandleEvents(net::EventQueue* events)
     for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
         if (m_Actors[i] != nullptr) {
             Event event = events->GetNextEvent();
-            while (event.Type != EVENT_NONE) {
+            while (event.Type != EVENT_NONE_EVENT) {
                 if (m_Actors[i]->HandleEvent(event)) {
                     events->HandleThisEvent();
                 }

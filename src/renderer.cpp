@@ -9,6 +9,7 @@
 net::Renderer::Renderer(const RendererSettings& settings) : m_ClearColor(settings.ClearColor)
 {
     InitWindow(settings.WindowWidth, settings.WindowHeight, settings.WindowTitle);
+    //SetTargetFPS(60);
 
     m_Camera = {
         .offset = { .x = settings.WindowWidth / 2.f, .y = settings.WindowHeight / 2.f },
@@ -18,6 +19,11 @@ net::Renderer::Renderer(const RendererSettings& settings) : m_ClearColor(setting
     };
 
     m_RenderTexture = LoadRenderTexture(settings.WindowWidth, settings.WindowHeight);
+}
+
+void net::Renderer::DrawText(const char* text, int32_t x, int32_t y)
+{
+    ::DrawText(text, x, y, 10, WHITE);
 }
 
 void net::Renderer::PostEvents(net::EventQueue* queue)

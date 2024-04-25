@@ -43,7 +43,7 @@ public:
     static Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
 
 private:
-    Texture2D m_cardsTexture = {};
+    Texture2D m_CardsTexture = {};
 
     CardValue m_Value;
     CardSuit m_Suit;

@@ -27,6 +27,8 @@ public:
     Renderer(Renderer&& renderer) = delete;
     ~Renderer() = default;
 
+    void DrawText(const char* text, int32_t x, int32_t y);
+
     void PostEvents(net::EventQueue* queue);
     void Begin();
     void End();

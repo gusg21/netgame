@@ -15,7 +15,7 @@ public:
     Networker(Networker& other) = delete;
     void operator=(const Networker&) = delete;
 
-    void Update();
+    void PostEvents(EventQueue* queue);
 
 private:
     Socket* m_Socket;
