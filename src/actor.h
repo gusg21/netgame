@@ -7,14 +7,27 @@
 
 #include <iostream>
 
+#include "renderer.h"
+
 namespace net {
-    class Actor {
-    public:
-        ~Actor() { std::cout << "Actor Destroyed" << std::endl; }
+class State;
 
-        virtual void Update() = 0;
-        virtual void Draw() = 0;
-    };
-}
+class Actor {
+public:
+    ~Actor() { std::cout << "Actor Destroyed" << std::endl; }
 
-#endif //NETGAME_ACTOR_H
+    void SetState(net::State* state) { m_State = state; }
+
+    virtual bool HandleEvent(net::Event event) { return false; };
+    virtual void Update() {};
+    virtual void Draw(net::Renderer* renderer) {};
+
+    bool IsAlive() { return m_Alive; }
+
+private:
+    net::State* m_State;
+    bool m_Alive = false;
+};
+} // namespace net
+
+#endif // NETGAME_ACTOR_H

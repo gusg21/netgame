@@ -15,8 +15,8 @@ add_executable(netgame
         src/actor.h
         "src/game/card.cpp"
         "src/game/card.h"
-        "src/game/networker.cpp"
-        "src/game/networker.h" 
+        "src/networker.cpp"
+        "src/networker.h" 
         "src/state.h" 
         "src/state.cpp" 
         "src/game.h"
@@ -25,9 +25,17 @@ add_executable(netgame
         "src/renderer.h"
         
         "src/simplesock/socklib_generic.cpp"
-        "src/simplesock/socklib_win32.cpp"
         "src/simplesock/pool.cpp"
- "src/eventqueue.h" "src/eventqueue.cpp")
+        "src/eventqueue.h" 
+        "src/eventqueue.cpp")
+
+if (WIN32)
+    target_sources(netgame PRIVATE "src/simplesock/socklib_win32.cpp")
+endif()
+
+if (UNIX)
+    target_sources(netgame PRIVATE "src/simplesock/socklib_posix.cpp")
+endif()
 
 set(BUILD_EXAMPLE "")
 set(BUILD_EXAMPLES OFF)
@@ -41,6 +49,14 @@ if (WIN32)
     file(REMOVE_RECURSE ${CMAKE_CURRENT_BINARY_DIR}/Debug/assets)
     add_custom_target(copy_assets
             COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/Debug/assets
+    )
+    add_dependencies(netgame copy_assets)
+endif()
+
+if (UNIX)
+    file(REMOVE_RECURSE ${CMAKE_CURRENT_BINARY_DIR}/assets)
+    add_custom_target(copy_assets
+            COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_LIST_DIR}/assets ${CMAKE_CURRENT_BINARY_DIR}/assets
     )
     add_dependencies(netgame copy_assets)
 endif()

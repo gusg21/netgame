@@ -1,0 +1,192 @@
+[
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/main.cpp.o -c /Users/gus/Projects/netgame/src/main.cpp",
+  "file": "/Users/gus/Projects/netgame/src/main.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/game/card.cpp.o -c /Users/gus/Projects/netgame/src/game/card.cpp",
+  "file": "/Users/gus/Projects/netgame/src/game/card.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/networker.cpp.o -c /Users/gus/Projects/netgame/src/networker.cpp",
+  "file": "/Users/gus/Projects/netgame/src/networker.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/state.cpp.o -c /Users/gus/Projects/netgame/src/state.cpp",
+  "file": "/Users/gus/Projects/netgame/src/state.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/game.cpp.o -c /Users/gus/Projects/netgame/src/game.cpp",
+  "file": "/Users/gus/Projects/netgame/src/game.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/renderer.cpp.o -c /Users/gus/Projects/netgame/src/renderer.cpp",
+  "file": "/Users/gus/Projects/netgame/src/renderer.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/simplesock/socklib_generic.cpp.o -c /Users/gus/Projects/netgame/src/simplesock/socklib_generic.cpp",
+  "file": "/Users/gus/Projects/netgame/src/simplesock/socklib_generic.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/simplesock/pool.cpp.o -c /Users/gus/Projects/netgame/src/simplesock/pool.cpp",
+  "file": "/Users/gus/Projects/netgame/src/simplesock/pool.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/eventqueue.cpp.o -c /Users/gus/Projects/netgame/src/eventqueue.cpp",
+  "file": "/Users/gus/Projects/netgame/src/eventqueue.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang++ -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/src/simplesock -I/Users/gus/Projects/netgame/external/raylib/src -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu++2a -o CMakeFiles/netgame.dir/src/simplesock/socklib_posix.cpp.o -c /Users/gus/Projects/netgame/src/simplesock/socklib_posix.cpp",
+  "file": "/Users/gus/Projects/netgame/src/simplesock/socklib_posix.cpp"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -DGL_SILENCE_DEPRECATION -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/external/raylib/src -isystem /Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu99 -o external/raylib/raylib/CMakeFiles/raylib.dir/rcore.c.o -c /Users/gus/Projects/netgame/external/raylib/src/rcore.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/rcore.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -DGL_SILENCE_DEPRECATION -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/external/raylib/src -isystem /Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu99 -o external/raylib/raylib/CMakeFiles/raylib.dir/rmodels.c.o -c /Users/gus/Projects/netgame/external/raylib/src/rmodels.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/rmodels.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -DGL_SILENCE_DEPRECATION -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/external/raylib/src -isystem /Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu99 -o external/raylib/raylib/CMakeFiles/raylib.dir/rshapes.c.o -c /Users/gus/Projects/netgame/external/raylib/src/rshapes.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/rshapes.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -DGL_SILENCE_DEPRECATION -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/external/raylib/src -isystem /Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu99 -o external/raylib/raylib/CMakeFiles/raylib.dir/rtext.c.o -c /Users/gus/Projects/netgame/external/raylib/src/rtext.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/rtext.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -DGL_SILENCE_DEPRECATION -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/external/raylib/src -isystem /Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu99 -o external/raylib/raylib/CMakeFiles/raylib.dir/rtextures.c.o -c /Users/gus/Projects/netgame/external/raylib/src/rtextures.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/rtextures.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -DGL_SILENCE_DEPRECATION -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/external/raylib/src -isystem /Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu99 -o external/raylib/raylib/CMakeFiles/raylib.dir/utils.c.o -c /Users/gus/Projects/netgame/external/raylib/src/utils.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/utils.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -DGL_SILENCE_DEPRECATION -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -I/Users/gus/Projects/netgame/external/raylib/src -isystem /Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -std=gnu99 -o external/raylib/raylib/CMakeFiles/raylib.dir/raudio.c.o -c /Users/gus/Projects/netgame/external/raylib/src/raudio.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/raudio.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/context.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/context.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/context.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/init.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/init.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/init.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/input.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/input.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/input.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/monitor.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/monitor.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/monitor.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/platform.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/platform.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/platform.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/vulkan.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/vulkan.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/vulkan.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/window.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/window.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/window.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/egl_context.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/egl_context.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/egl_context.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/osmesa_context.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/osmesa_context.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/osmesa_context.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_init.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_init.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_init.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_monitor.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_monitor.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_monitor.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_window.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_window.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_window.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/null_joystick.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_joystick.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/null_joystick.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/cocoa_time.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_time.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_time.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_module.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/posix_module.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/posix_module.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/posix_thread.c.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/posix_thread.c",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/posix_thread.c"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/cocoa_init.m.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_init.m",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_init.m"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/cocoa_joystick.m.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_joystick.m",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_joystick.m"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/cocoa_monitor.m.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_monitor.m",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_monitor.m"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/cocoa_window.m.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_window.m",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/cocoa_window.m"
+},
+{
+  "directory": "/Users/gus/Projects/netgame/build",
+  "command": "/usr/bin/clang -D_GLFW_COCOA -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/include -I/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src -I/Users/gus/Projects/netgame/build/external/raylib/raylib/external/glfw/src -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.3.sdk -mmacosx-version-min=13.1 -fPIC -Wall -std=c99 -o external/raylib/raylib/external/glfw/src/CMakeFiles/glfw.dir/nsgl_context.m.o -c /Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/nsgl_context.m",
+  "file": "/Users/gus/Projects/netgame/external/raylib/src/external/glfw/src/nsgl_context.m"
+}
+]

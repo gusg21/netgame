@@ -10,31 +10,44 @@
 #include "../actor.h"
 
 namespace net {
-    enum class CardValue {
-        A, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING
-    };
+enum class CardValue {
+    A,
+    TWO,
+    THREE,
+    FOUR,
+    FIVE,
+    SIX,
+    SEVEN,
+    EIGHT,
+    NINE,
+    TEN,
+    JACK,
+    QUEEN,
+    KING
+};
 
-    enum class CardSuit {
-        HEARTS, DIAMONDS, SPADES, CLUBS
-    };
+enum class CardSuit {
+    HEARTS,
+    DIAMONDS,
+    SPADES,
+    CLUBS
+};
 
-    class Card : public Actor {
-    public:
-        Card(CardValue value, CardSuit suit);
+class Card : public Actor {
+public:
+    Card(CardValue value, CardSuit suit);
 
-        void Update() override;
-        void Draw() override;
+    void Update() override;
+    void Draw(net::Renderer* renderer) override;
 
-        static Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
+    static Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
 
-    private:
-        Texture2D m_cardsTexture = {};
+private:
+    Texture2D m_cardsTexture = {};
 
-        CardValue m_Value;
-        CardSuit m_Suit;
-    };
+    CardValue m_Value;
+    CardSuit m_Suit;
+};
 }
 
-
-
-#endif //NETGAME_CARD_H
+#endif // NETGAME_CARD_H

@@ -5,34 +5,48 @@
 #ifndef NETGAME_EVENTQUEUE_H
 #define NETGAME_EVENTQUEUE_H
 
-#include <queue>
+#include <deque>
 #include <raylib.h>
 
 namespace net {
-	struct KeyEvent {
-		uint32_t Key;
-		bool Pressed;
-	};
+#define EVENT_NONE 0
 
-	struct CustomEvent {
-		void* Data;
-	};
+struct KeyEvent {
+    uint32_t Key;
+    bool Pressed;
+};
+#define EVENT_KEY_EVENT 1
 
-	union Event {
-		uint32_t Type;
+struct QuitEvent {
+	uint32_t _;
+};
+#define EVENT_QUIT_EVENT 2
 
-		KeyEvent AsKeyEvent;
-		CustomEvent AsCustomEvent;
-	};
+struct CustomEvent {
+    void* Data;
+};
+#define EVENT_CUSTOM_EVENT INT32_MAX
 
-	class EventQueue {
-	public:
-		bool IsEmpty() { return m_Queue.empty(); };
-		Event PopNextEvent();
+union Event {
+    uint32_t Type;
 
-	private:
-		std::queue<Event> m_Queue;
-	};
+    KeyEvent AsKeyEvent;
+	QuitEvent AsQuitEvent;
+    CustomEvent AsCustomEvent;
+};
+
+class EventQueue {
+public:
+    bool IsEmpty() { return m_Queue.empty(); };
+    void PostEvent(Event event);
+	Event GetNextEvent();
+	void HandleThisEvent();
+	void ResetEventReadHead();
+
+private:
+    std::deque<Event> m_Queue;
+	uint32_t m_ReadHeadIndex = 0;
+};
 }
 
 #endif

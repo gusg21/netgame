@@ -2,15 +2,50 @@
 #include "actor.h"
 #include <memory>
 
+net::State::State()
+    : m_Actors()
+    , m_NextActorIndex(0)
+    , m_Valid(false)
+{
+}
+
+void net::State::HandleEvents(net::EventQueue* events)
+{
+    events->ResetEventReadHead();
+    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
+        if (m_Actors[i] != nullptr) {
+            Event event = events->GetNextEvent();
+            while (event.Type != EVENT_NONE) {
+                if (m_Actors[i]->HandleEvent(event)) {
+                    events->HandleThisEvent();
+                }
+                event = events->GetNextEvent();
+            }
+            events->ResetEventReadHead();
+        }
+    }
+}
+
 void net::State::Update()
 {
+    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
+        if (m_Actors[i] != nullptr)
+            m_Actors[i]->Update();
+    }
 }
 
-void net::State::Draw()
+void net::State::Draw(net::Renderer* renderer)
 {
+    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
+        if (m_Actors[i] != nullptr)
+            m_Actors[i]->Draw(renderer);
+    }
 }
 
-void net::State::AddActor(std::shared_ptr<Actor> actor)
+void net::State::AddActor(Actor* actor)
 {
-	m_Actors.push_back(actor);
+    m_Actors[m_NextActorIndex] = actor;
+    m_NextActorIndex++;
+
+	actor->SetState(this);
 }

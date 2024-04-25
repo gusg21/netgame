@@ -2,26 +2,54 @@
 
 #include "renderer.h"
 
-net::Game::Game(const RendererSettings& settings) : m_Renderer(settings), m_Networker() {
+net::Game::Game(const RendererSettings& settings)
+    : m_Renderer(settings)
+    , m_Networker()
+    , m_States()
+{
 }
 
-net::State* net::Game::NewState() {
-	net::State* state = &m_States[m_NextStateIndex++];
+net::State* net::Game::NewState()
+{
+    net::State* state = &m_States[m_NextStateIndex++];
 
-	state->SetValidity(true);
+    state->SetValidity(true);
 
-	return state;
+    return state;
 }
 
-void net::Game::RunGame(net::State* initialState) {
-	bool shouldQuit = false;
-	while (!shouldQuit) {
+void net::Game::RunGame(net::State* initialState)
+{
+    m_CurrentState = initialState;
 
-		// Drawing
-		m_Renderer.Begin();
+    bool shouldQuit = false;
+    while (!shouldQuit) {
+		// Process events
+		Event event = m_EventQueue.GetNextEvent();
+		while (event.Type != EVENT_NONE) {
+			if (event.Type == EVENT_QUIT_EVENT) {
+				m_EventQueue.HandleThisEvent();
+				shouldQuit = true;
+			}
 
-		m_Renderer.End();
+			event = m_EventQueue.GetNextEvent();
+		}
+		m_EventQueue.ResetEventReadHead();
 
-		m_Renderer.Present();
-	}
+		m_CurrentState->HandleEvents(&m_EventQueue);
+
+		// Update game state
+        m_CurrentState->Update();
+
+        // Drawing
+        m_Renderer.Begin();
+        {
+            m_CurrentState->Draw(&m_Renderer);
+        }
+        m_Renderer.End();
+
+        m_Renderer.Present();
+
+		m_Renderer.PostEvents(&m_EventQueue);
+    }
 }

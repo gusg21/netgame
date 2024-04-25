@@ -1,22 +1,30 @@
 #pragma once
-#include <vector>
+#include <array>
 #include <memory>
+
 #include "actor.h"
+#include "renderer.h"
+
+#define STATE_MAX_ACTORS 128
 
 namespace net {
-	class State {
-	public:
-		void Update();
-		void Draw();
+class State {
+public:
+    State();
 
-		bool GetValidity() { return m_Valid; }
-		void SetValidity(bool valid) { m_Valid = valid; }
+	void HandleEvents(net::EventQueue* events);
+    void Update();
+    void Draw(net::Renderer* renderer);
 
-		void AddActor(std::shared_ptr<Actor> actor);
+    bool GetValidity() { return m_Valid; }
+    void SetValidity(bool valid) { m_Valid = valid; }
 
-	private:
-		bool m_Valid = false;
+    void AddActor(Actor* actor);
 
-		std::vector<std::shared_ptr<Actor>> m_Actors;
-	};
+private:
+    bool m_Valid = false;
+
+    std::array<Actor*, STATE_MAX_ACTORS> m_Actors;
+    uint32_t m_NextActorIndex = 0;
+};
 }

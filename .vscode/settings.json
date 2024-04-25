@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.mal": "clojure",
+        "*.asm": "ca65",
+        "*.json": "jsonc",
+        "queue": "cpp",
+        "deque": "cpp",
+        "ios": "cpp"
+    }
+}
