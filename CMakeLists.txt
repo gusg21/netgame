@@ -23,11 +23,18 @@ add_executable(netgame
         "src/game.cpp"
         "src/renderer.cpp"
         "src/renderer.h"
-        
         "src/simplesock/socklib_generic.cpp"
         "src/simplesock/pool.cpp"
         "src/eventqueue.h" 
-        "src/eventqueue.cpp")
+        "src/eventqueue.cpp"
+        "src/lobby/nameentry.cpp"
+        "src/lobby/nameentry.h"
+        "src/input.h"
+        "src/input.cpp"
+
+
+
+)
 
 if (WIN32)
     target_sources(netgame PRIVATE "src/simplesock/socklib_win32.cpp")

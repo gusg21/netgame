@@ -11,6 +11,7 @@
 #include "networker.h"
 #include "renderer.h"
 #include "state.h"
+#include "input.h"
 
 namespace net {
 class Game {
@@ -23,6 +24,7 @@ public:
 private:
     net::Networker m_Networker;
     net::Renderer m_Renderer;
+    net::Input m_Input;
     net::EventQueue m_EventQueue;
 
     std::array<net::State, 16> m_States;

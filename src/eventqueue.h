@@ -9,7 +9,7 @@
 #include <raylib.h>
 
 namespace net {
-#define EVENT_NONE 0
+#define EVENT_NONE_EVENT 0
 
 struct KeyEvent {
     uint32_t Key;
@@ -18,34 +18,45 @@ struct KeyEvent {
 #define EVENT_KEY_EVENT 1
 
 struct QuitEvent {
-	uint32_t _;
+    uint32_t _;
 };
 #define EVENT_QUIT_EVENT 2
+
+struct CharEvent {
+    char Char;
+};
+#define EVENT_CHAR_EVENT 3
 
 struct CustomEvent {
     void* Data;
 };
 #define EVENT_CUSTOM_EVENT INT32_MAX
 
-union Event {
+union EventData {
+    KeyEvent AsKeyEvent;
+    QuitEvent AsQuitEvent;
+    CharEvent AsCharEvent;
+
+    CustomEvent AsCustomEvent;
+};
+
+struct Event {
     uint32_t Type;
 
-    KeyEvent AsKeyEvent;
-	QuitEvent AsQuitEvent;
-    CustomEvent AsCustomEvent;
+    EventData Data;
 };
 
 class EventQueue {
 public:
     bool IsEmpty() { return m_Queue.empty(); };
     void PostEvent(Event event);
-	Event GetNextEvent();
-	void HandleThisEvent();
-	void ResetEventReadHead();
+    Event GetNextEvent();
+    void HandleThisEvent();
+    void ResetEventReadHead();
 
 private:
     std::deque<Event> m_Queue;
-	uint32_t m_ReadHeadIndex = 0;
+    uint32_t m_ReadHeadIndex = 0;
 };
 }
 

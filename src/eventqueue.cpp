@@ -5,7 +5,7 @@ void net::EventQueue::PostEvent(Event event) { m_Queue.push_back(event); }
 net::Event net::EventQueue::GetNextEvent()
 {
     if (m_ReadHeadIndex >= m_Queue.size() || m_ReadHeadIndex < 0)
-        return { .Type = EVENT_NONE };
+        return { .Type = EVENT_NONE_EVENT };
     
     Event event = m_Queue[m_ReadHeadIndex];
 
@@ -16,7 +16,8 @@ net::Event net::EventQueue::GetNextEvent()
 
 void net::EventQueue::HandleThisEvent()
 {
-    m_Queue.erase(m_Queue.begin() + m_ReadHeadIndex);
+    if (m_ReadHeadIndex >= 0 && m_ReadHeadIndex < m_Queue.size())
+        m_Queue.erase(m_Queue.begin() + m_ReadHeadIndex);
 }
 
 void net::EventQueue::ResetEventReadHead()
