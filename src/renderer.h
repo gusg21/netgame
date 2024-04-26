@@ -27,17 +27,21 @@ public:
     Renderer(Renderer&& renderer) = delete;
     ~Renderer() = default;
 
-    void DrawText(const char* text, int32_t x, int32_t y);
+    void DrawText(const char* text, int32_t x, int32_t y, Color8 color);
+    void DrawTextFormatted(const char* format, int32_t x, int32_t y, Color8 color, ...);
 
     void PostEvents(net::EventQueue* queue);
     void Begin();
     void End();
+    void BeginWorldSpace();
+    void EndWorldSpace();
     void Present();
 
 private:
     Camera2D m_Camera;
     RenderTexture2D m_RenderTexture;
     net::Color8 m_ClearColor;
+
 };
 }
 

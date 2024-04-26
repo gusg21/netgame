@@ -21,9 +21,19 @@ net::Renderer::Renderer(const RendererSettings& settings) : m_ClearColor(setting
     m_RenderTexture = LoadRenderTexture(settings.WindowWidth, settings.WindowHeight);
 }
 
-void net::Renderer::DrawText(const char* text, int32_t x, int32_t y)
+void net::Renderer::DrawText(const char* text, int32_t x, int32_t y, Color8 color)
 {
-    ::DrawText(text, x, y, 10, WHITE);
+    ::DrawText(text, x, y, 10, { color.r, color.g, color.b, color.a });
+}
+
+void net::Renderer::DrawTextFormatted(const char* format, int32_t x, int32_t y, Color8 color, ...)
+{
+    char text[1024] = {0};
+    va_list args;
+    va_start(args, color);
+    vsnprintf(text, 1024, format, args);
+    va_end(args);
+    ::DrawText(text, x, y, 10, { color.r, color.g, color.b, color.a });
 }
 
 void net::Renderer::PostEvents(net::EventQueue* queue)
@@ -41,13 +51,10 @@ void net::Renderer::Begin()
     BeginTextureMode(m_RenderTexture);
 
     ClearBackground({ m_ClearColor.r, m_ClearColor.g, m_ClearColor.b, m_ClearColor.a });
-
-    BeginMode2D(m_Camera);
 }
 
 void net::Renderer::End()
 {
-    EndMode2D();
     EndTextureMode();
 
     DrawFPS(10, 10);
@@ -62,4 +69,12 @@ void net::Renderer::Present()
         WHITE);
 
     EndDrawing();
+}
+void net::Renderer::BeginWorldSpace()
+{
+    BeginMode2D(m_Camera);
+}
+void net::Renderer::EndWorldSpace()
+{
+    EndMode2D();
 }

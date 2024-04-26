@@ -31,7 +31,10 @@ add_executable(netgame
         "src/lobby/nameentry.h"
         "src/input.h"
         "src/input.cpp"
-
+        src/lobby/button.cpp
+        src/lobby/button.h
+        src/rectangle.h
+        src/vec2.h
 
 
 )

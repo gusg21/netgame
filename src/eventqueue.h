@@ -27,6 +27,12 @@ struct CharEvent {
 };
 #define EVENT_CHAR_EVENT 3
 
+struct MouseMotionEvent {
+    float DeltaX, DeltaY;
+    float X, Y;
+};
+#define EVENT_MOUSE_MOTION_EVENT 4
+
 struct CustomEvent {
     void* Data;
 };
@@ -36,6 +42,7 @@ union EventData {
     KeyEvent AsKeyEvent;
     QuitEvent AsQuitEvent;
     CharEvent AsCharEvent;
+    MouseMotionEvent AsMouseMotionEvent;
 
     CustomEvent AsCustomEvent;
 };
@@ -53,6 +60,7 @@ public:
     Event GetNextEvent();
     void HandleThisEvent();
     void ResetEventReadHead();
+    void ClearEvents() { m_Queue.clear(); };
 
 private:
     std::deque<Event> m_Queue;

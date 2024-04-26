@@ -8,6 +8,7 @@
 #include "actor.h"
 #include "game.h"
 #include "game/card.h"
+#include "lobby/button.h"
 #include "lobby/nameentry.h"
 
 #define WINDOW_WIDTH 1600
@@ -22,6 +23,7 @@ int main()
 
     net::State* lobbyState = game->NewState();
     lobbyState->AddActor(new net::NameEntry());
+    lobbyState->AddActor(new net::Button("Hello", {10, 70, 100, 30}));
 
     game->RunGame(lobbyState);
 

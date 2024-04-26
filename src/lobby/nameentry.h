@@ -13,12 +13,12 @@ public:
     NameEntry();
 
     bool HandleEvent(net::Event event) override;
-    void Update() override;
-    void Draw(net::Renderer* renderer) override;
+    void Update(float deltaSeconds) override;
+    void DrawUI(net::Renderer* renderer) override;
 
 private:
     char m_NameBuffer[256];
-    char m_NameBufferCursor = 0;
+    unsigned char m_NameBufferCursor = 0;
 };
 }
 

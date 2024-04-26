@@ -22,13 +22,14 @@ public:
     void SetState(net::State* state) { m_State = state; }
 
     virtual bool HandleEvent(net::Event event) { return false; };
-    virtual void Update() {};
+    virtual void Update(float deltaSeconds) {};
     virtual void Draw(net::Renderer* renderer) {};
+    virtual void DrawUI(net::Renderer* renderer) {};
 
-    bool IsAlive() const { return m_Alive; }
+    [[nodiscard]] bool IsAlive() const { return m_Alive; }
 
 protected:
-    [[nodiscard]] net::State* GetState() { return m_State; }
+    [[nodiscard]] net::State* GetState() const { return m_State; }
 
 private:
     net::State* m_State = nullptr;

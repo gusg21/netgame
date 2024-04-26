@@ -27,6 +27,11 @@ void net::Game::RunGame(net::State* initialState)
 
     bool shouldQuit = false;
     while (!shouldQuit) {
+        m_EventQueue.ClearEvents();
+        m_Renderer.PostEvents(&m_EventQueue);
+        m_Input.PostEvents(&m_EventQueue);
+        m_Networker.PostEvents(&m_EventQueue);
+
         // Process events
         Event event = m_EventQueue.GetNextEvent();
         while (event.Type != EVENT_NONE_EVENT) {
@@ -43,24 +48,22 @@ void net::Game::RunGame(net::State* initialState)
         m_CurrentState->HandleEvents(&m_EventQueue);
 
         // Update game state
-        m_CurrentState->Update();
-
-        // Acquire Net Events
-        // if (frameNumber % 300 == 0) { // 5 seconds (approx)
-        m_Networker.PostEvents(&m_EventQueue);
-        //}
+        m_CurrentState->Update(GetFrameTime());
 
         // Drawing
         m_Renderer.Begin();
         {
-            m_CurrentState->Draw(&m_Renderer);
+            m_Renderer.BeginWorldSpace();
+            {
+                m_CurrentState->Draw(&m_Renderer);
+            }
+            m_Renderer.EndWorldSpace();
+
+            m_CurrentState->DrawUI(&m_Renderer);
         }
         m_Renderer.End();
 
         m_Renderer.Present();
-
-        m_Renderer.PostEvents(&m_EventQueue);
-        m_Input.PostEvents(&m_EventQueue);
 
         frameNumber++;
     }

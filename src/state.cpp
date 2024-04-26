@@ -26,12 +26,14 @@ void net::State::HandleEvents(net::EventQueue* events)
     }
 }
 
-void net::State::Update()
+void net::State::Update(float deltaSeconds)
 {
     for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
         if (m_Actors[i] != nullptr)
-            m_Actors[i]->Update();
+            m_Actors[i]->Update(deltaSeconds);
     }
+    m_FrameNumber++;
+    m_ElapsedTime += deltaSeconds;
 }
 
 void net::State::Draw(net::Renderer* renderer)
@@ -47,5 +49,12 @@ void net::State::AddActor(Actor* actor)
     m_Actors[m_NextActorIndex] = actor;
     m_NextActorIndex++;
 
-	actor->SetState(this);
+    actor->SetState(this);
+}
+void net::State::DrawUI(net::Renderer* renderer)
+{
+    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
+        if (m_Actors[i] != nullptr)
+            m_Actors[i]->DrawUI(renderer);
+    }
 }

@@ -19,7 +19,7 @@ net::Card::Card(net::CardValue value, net::CardSuit suit)
     m_CardsTexture = LoadTexture("assets/cards.png");
 }
 
-void net::Card::Update()
+void net::Card::Update(float deltaSeconds)
 {
 }
 

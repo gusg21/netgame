@@ -37,7 +37,7 @@ class Card : public Actor {
 public:
     Card(CardValue value, CardSuit suit);
 
-    void Update() override;
+    void Update(float deltaSeconds) override;
     void Draw(net::Renderer* renderer) override;
 
     static Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
