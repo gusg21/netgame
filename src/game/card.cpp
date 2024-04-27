@@ -14,9 +14,8 @@
 net::Card::Card(net::CardValue value, net::CardSuit suit)
     : m_Value(value)
     , m_Suit(suit)
+    , m_CardsTexture("assets/cards.png")
 {
-    // TODO: Remove raylib-specific code!
-    m_CardsTexture = LoadTexture("assets/cards.png");
 }
 
 void net::Card::Update(float deltaSeconds)
@@ -26,10 +25,10 @@ void net::Card::Update(float deltaSeconds)
 void net::Card::Draw(net::Renderer* renderer)
 {
     // TODO: Remove raylib-specific code!
-    DrawTextureRec(m_CardsTexture, GetCardTexCoords(m_Value, m_Suit), Vector2Zero(), WHITE);
+    renderer->DrawTextureRec(m_CardsTexture, GetCardTexCoords(m_Value, m_Suit), 0.f, 0.f, C8WHITE);
 }
 
-Rectangle net::Card::GetCardTexCoords(net::CardValue value, net::CardSuit suit)
+net::Rectangle net::Card::GetCardTexCoords(net::CardValue value, net::CardSuit suit)
 {
     return {
         ((float)value * CARD_WIDTH), ((float)suit * CARD_HEIGHT),

@@ -10,6 +10,7 @@
 #include "game/card.h"
 #include "lobby/button.h"
 #include "lobby/nameentry.h"
+#include "lobby/lobby.h"
 
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT 900
@@ -22,12 +23,14 @@ int main()
     gameState->AddActor(new net::Card(net::CardValue::FIVE, net::CardSuit::CLUBS));
 
     net::State* lobbyState = game->NewState();
-    lobbyState->AddActor(new net::NameEntry());
-    lobbyState->AddActor(new net::Button("Hello", {10, 70, 100, 30}));
+    net::Button* button = new net::Button("Hello", { 10, 70, 100, 30 });
+    net::NameEntry* entry = new net::NameEntry();
+    net::Lobby* lobby = new net::Lobby(button, entry);
+    lobbyState->AddActor(entry);
+    lobbyState->AddActor(button);
+    lobbyState->AddActor(lobby);
 
     game->RunGame(lobbyState);
-
-    delete game;
 
     return 0;
 }

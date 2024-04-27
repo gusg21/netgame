@@ -26,6 +26,14 @@ void net::State::HandleEvents(net::EventQueue* events)
     }
 }
 
+void net::State::PreUpdate(float deltaSeconds)
+{
+    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
+        if (m_Actors[i] != nullptr)
+            m_Actors[i]->PreUpdate(deltaSeconds);
+    }
+}
+
 void net::State::Update(float deltaSeconds)
 {
     for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {

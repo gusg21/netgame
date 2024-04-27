@@ -27,6 +27,8 @@ void net::Game::RunGame(net::State* initialState)
 
     bool shouldQuit = false;
     while (!shouldQuit) {
+        m_CurrentState->PreUpdate(GetFrameTime());
+
         m_EventQueue.ClearEvents();
         m_Renderer.PostEvents(&m_EventQueue);
         m_Input.PostEvents(&m_EventQueue);

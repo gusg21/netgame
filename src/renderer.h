@@ -10,6 +10,8 @@
 
 #include "color.h"
 #include "eventqueue.h"
+#include "rectangle.h"
+#include "texture.h"
 
 namespace net {
 struct RendererSettings {
@@ -27,10 +29,16 @@ public:
     Renderer(Renderer&& renderer) = delete;
     ~Renderer() = default;
 
-    void DrawText(const char* text, int32_t x, int32_t y, Color8 color);
-    void DrawTextFormatted(const char* format, int32_t x, int32_t y, Color8 color, ...);
+    void DrawText(const char* text, int32_t fontSize, int32_t x, int32_t y, Color8 color);
+    void DrawTextFormatted(const char* format, int32_t fontSize, int32_t x, int32_t y, Color8 color, ...);
+    void DrawRectangle(net::Rectangle rect, Color8 color);
+    void DrawRectangleLines(net::Rectangle rect, Color8 color);
+    void DrawTextureRec(net::Texture tex, net::Rectangle srcRect, float x, float y, Color8 color);
 
-    void PostEvents(net::EventQueue* queue);
+    float GetTextWidth(const char* text, int32_t fontSize);
+    float GetTextHeight(const char* text, int32_t fontSize);
+
+    void PostEvents(EventQueue* queue);
     void Begin();
     void End();
     void BeginWorldSpace();
@@ -40,7 +48,7 @@ public:
 private:
     Camera2D m_Camera;
     RenderTexture2D m_RenderTexture;
-    net::Color8 m_ClearColor;
+    Color8 m_ClearColor;
 
 };
 }

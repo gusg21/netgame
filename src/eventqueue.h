@@ -8,11 +8,13 @@
 #include <deque>
 #include <raylib.h>
 
+#include "input.h"
+
 namespace net {
 #define EVENT_NONE_EVENT 0
 
 struct KeyEvent {
-    uint32_t Key;
+    KeyCode Key;
     bool Pressed;
 };
 #define EVENT_KEY_EVENT 1
@@ -33,6 +35,12 @@ struct MouseMotionEvent {
 };
 #define EVENT_MOUSE_MOTION_EVENT 4
 
+struct MouseButtonEvent {
+    MouseButton Button;
+    bool Pressed;
+};
+#define EVENT_MOUSE_BUTTON_EVENT 5
+
 struct CustomEvent {
     void* Data;
 };
@@ -43,6 +51,7 @@ union EventData {
     QuitEvent AsQuitEvent;
     CharEvent AsCharEvent;
     MouseMotionEvent AsMouseMotionEvent;
+    MouseButtonEvent AsMouseButtonEvent;
 
     CustomEvent AsCustomEvent;
 };

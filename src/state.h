@@ -13,6 +13,7 @@ public:
     State();
 
     void HandleEvents(net::EventQueue* events);
+    void PreUpdate(float deltaSeconds);
     void Update(float deltaSeconds);
     void Draw(net::Renderer* renderer);
     void DrawUI(net::Renderer* renderer);

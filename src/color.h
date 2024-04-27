@@ -11,7 +11,17 @@ namespace net {
 struct Color8 {
     uint8_t r, g, b, a;
 };
-
 } // namespace net
+
+#define C8WHITE            \
+    Color8                 \
+    {                      \
+        255, 255, 255, 255 \
+    }
+#define C8BLUE             \
+    Color8                 \
+    {                      \
+        100, 110, 240, 255 \
+    }
 
 #endif // NETGAME_COLOR_H

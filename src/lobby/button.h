@@ -13,14 +13,20 @@ public:
     explicit Button(std::string text, net::Rectangle rect);
 
     bool HandleEvent(net::Event event) override;
+    void PreUpdate(float deltaSeconds) override;
     void Update(float deltaSeconds) override;
     void Draw(net::Renderer* renderer) override;
     void DrawUI(net::Renderer* renderer) override;
 
+    [[nodiscard]] bool WasPressed() const { return m_Pressed; }
+
 private:
     std::string m_Text;
-    bool m_MouseOver = false;
     net::Rectangle m_Rect;
+
+    bool m_MouseOver = false;
+    bool m_Clicked = false;
+    bool m_Pressed = false;
 };
 }
 

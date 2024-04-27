@@ -5,8 +5,6 @@
 #ifndef NETGAME_CARD_H
 #define NETGAME_CARD_H
 
-#include <raylib.h>
-
 #include "../actor.h"
 
 namespace net {
@@ -40,10 +38,10 @@ public:
     void Update(float deltaSeconds) override;
     void Draw(net::Renderer* renderer) override;
 
-    static Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
+    static net::Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
 
 private:
-    Texture2D m_CardsTexture = {};
+    Texture m_CardsTexture;
 
     CardValue m_Value;
     CardSuit m_Suit;
