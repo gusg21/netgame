@@ -61,6 +61,6 @@ void net::Lobby::DrawUI(net::Renderer* renderer)
     }
 
     for (uint32_t i = 0; i < m_LobbyNames.size(); i++) {
-        renderer->DrawText(m_LobbyNames[i].c_str(), 10, 10, 85 + (15 * i), C8BLUE);
+        renderer->DrawText(m_LobbyNames[i].c_str(), 10, 10, 100 + (15 * i), C8BLUE);
     }
 }

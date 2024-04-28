@@ -1,6 +1,7 @@
 import socketserver
 import socket
-import time
+# import time
+import datetime
 import enum
 
 class ClientEvent(enum.Enum):
@@ -46,22 +47,28 @@ class ServerPacket():
         return self._data
 
 class PlayerData():
-    def __init__(self, name) -> None:
+    def __init__(self, name: str = "UNKNOWN PLAYER") -> None:
         self.name = name
+        self.joined: bool = False
 
 class Game():
     def __init__(self) -> None:
         print("Game constructed.")
         self._players: dict[socket.socket, PlayerData] = {}
 
-    def add_player(self, name: str, socket: socket.socket) -> None:
-        self._players[socket] = PlayerData(name)
+    def add_player(self, socket: socket.socket) -> None:
+        self._players[socket] = PlayerData()
 
     def remove_player(self, socket: socket.socket) -> None:
+        print(self._players.keys())
         self._players.pop(socket)
     
     def has_player_with_socket(self, socket: socket) -> bool:
         return socket in self._players
+
+    def player_join(self, socket: socket.socket, name: str) -> None:
+        self._players[socket].name = name
+        self._players[socket].joined = True
 
     def get_player_name(self, socket: socket.socket) -> str | None:
         if socket in self._players:
@@ -69,30 +76,35 @@ class Game():
         return None
     
     def get_player_names(self) -> list[str]:
-        return [data.name for data in self._players.values()]
+        return [data.name for data in self._players.values() if data.joined]
 
-class ConnectionHandler(socketserver.BaseRequestHandler):
+class ClientHandler(socketserver.BaseRequestHandler):
     _game = Game()
 
+    def client_print(self, text: object):
+        print(f"{datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")}: {ClientHandler._game.get_player_name(self.request)}: " + str(text))
+
     def process_server_packet(self, packet: ServerPacket) -> ClientPacket | None:
-        my_name = type(self)._game.get_player_name(self.request)
+        my_name = ClientHandler._game.get_player_name(self.request)
         if my_name:
-            print(f"Packet from {my_name = }")
+            # print(f"Packet from {my_name = }")
+            pass
         else:
-            print("New socket incoming")
+            ClientHandler._game.add_player(self.request)
+            self.client_print(f"New socket incoming from {self.client_address = }")
 
         match packet.get_event():
             case ServerEvent.NONE:
                 pass
             case ServerEvent.CLIENT_JOIN:
                 name = packet.get_data().decode().replace("\0", "").strip()
-                print(f"Client joining ({name = })")
-                type(self)._game.add_player(name, self.request)
+                self.client_print(f"Client joining ({name = })")
+                ClientHandler._game.player_join(self.request, name)
                 return ClientPacket(ClientEvent.ACK_JOIN)
             case ServerEvent.REQUEST_LOBBY_NAMES:
-                return ClientPacket(ClientEvent.LIST_LOBBY_NAMES, ";".join(type(self)._game.get_player_names()).encode())
+                return ClientPacket(ClientEvent.LIST_LOBBY_NAMES, ";".join(ClientHandler._game.get_player_names()).encode())
             case _:
-                print(f"Can't handle packet of event {packet.get_event() = }")
+                self.client_print(f"Can't handle packet of event {packet.get_event() = }")
                 pass
 
     def handle(self) -> None:
@@ -101,8 +113,8 @@ class ConnectionHandler(socketserver.BaseRequestHandler):
             try:
                 raw_bytes = self.request.recv(1024)
             except ConnectionError:
-                name = type(self)._game.get_player_name(self.request)
-                print(f"Connection to the client ({name = }) failed!")
+                name = ClientHandler._game.get_player_name(self.request)
+                self.client_print(f"Connection to the client failed!")
                 return
 
             # Parse
@@ -115,9 +127,14 @@ class ConnectionHandler(socketserver.BaseRequestHandler):
             if response != None:
                 self.request.sendall(response.to_bytes())
 
+    def finish(self):
+        ClientHandler._game.remove_player(self.request)
+
+class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer): pass
+
 def main():
     print("Opening server...")
-    server = socketserver.TCPServer(("localhost", 1719), ConnectionHandler)
+    server = ThreadedTCPServer(("localhost", 1719), ClientHandler)
     
     with server:
         server.serve_forever()
