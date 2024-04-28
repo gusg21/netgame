@@ -41,6 +41,16 @@ struct MouseButtonEvent {
 };
 #define EVENT_MOUSE_BUTTON_EVENT 5
 
+struct AcknowledgeJoinEvent {
+    uint32_t _;
+};
+#define EVENT_ACK_JOIN_EVENT 6
+
+struct ListLobbyNamesEvent {
+    char names[256];
+};
+#define EVENT_LIST_LOBBY_NAMES_EVENT 7
+
 struct CustomEvent {
     void* Data;
 };
@@ -52,6 +62,8 @@ union EventData {
     CharEvent AsCharEvent;
     MouseMotionEvent AsMouseMotionEvent;
     MouseButtonEvent AsMouseButtonEvent;
+    AcknowledgeJoinEvent AsAckJoinEvent;
+    ListLobbyNamesEvent AsListLobbyNamesEvent;
 
     CustomEvent AsCustomEvent;
 };

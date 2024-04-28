@@ -8,6 +8,8 @@
 #include "../actor.h"
 #include "../rectangle.h"
 
+#include <vector>
+
 namespace net {
 class Button;
 class NameEntry;
@@ -24,6 +26,9 @@ public:
 private:
     net::Button* m_JoinButton;
     net::NameEntry* m_NameEntry;
+
+    bool m_Joined = false;
+    std::vector<std::string> m_LobbyNames;
 };
 }
 

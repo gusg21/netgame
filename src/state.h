@@ -2,12 +2,14 @@
 #include <array>
 #include <memory>
 
-#include "actor.h"
-#include "renderer.h"
-
 #define STATE_MAX_ACTORS 128
 
 namespace net {
+class Actor;
+class Game;
+class Renderer;
+class EventQueue;
+
 class State {
 public:
     State();
@@ -18,11 +20,13 @@ public:
     void Draw(net::Renderer* renderer);
     void DrawUI(net::Renderer* renderer);
 
-    bool GetValidity() { return m_Valid; }
+    [[nodiscard]] bool GetValidity() const { return m_Valid; }
     void SetValidity(bool valid) { m_Valid = valid; }
+    [[nodiscard]] net::Game* GetGame() const { return m_Game; }
+    void SetGame(net::Game* game) { m_Game = game; }
 
-    [[nodiscard]] uint32_t GetFrameNumber() const { return m_FrameNumber; };
-    [[nodiscard]] float GetElapsedTime() const { return m_ElapsedTime; };
+    [[nodiscard]] uint32_t GetFrameNumber() const { return m_FrameNumber; }
+    [[nodiscard]] float GetElapsedTime() const { return m_ElapsedTime; }
 
     void AddActor(Actor* actor);
 
@@ -31,7 +35,9 @@ private:
     uint32_t m_FrameNumber = 0;
     float m_ElapsedTime = 0.f;
 
-    std::array<Actor*, STATE_MAX_ACTORS> m_Actors;
+    net::Game* m_Game;
+
+    std::array<net::Actor*, STATE_MAX_ACTORS> m_Actors;
     uint32_t m_NextActorIndex = 0;
 };
 }

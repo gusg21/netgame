@@ -16,6 +16,8 @@ public:
     void Update(float deltaSeconds) override;
     void DrawUI(net::Renderer* renderer) override;
 
+    [[nodiscard]] const char* GetName() const { return m_NameBuffer; }
+
 private:
     char m_NameBuffer[256];
     unsigned char m_NameBufferCursor = 0;

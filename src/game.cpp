@@ -16,6 +16,7 @@ net::State* net::Game::NewState()
     net::State* state = &m_States[m_NextStateIndex++];
 
     state->SetValidity(true);
+    state->SetGame(this);
 
     return state;
 }
@@ -32,7 +33,7 @@ void net::Game::RunGame(net::State* initialState)
         m_EventQueue.ClearEvents();
         m_Renderer.PostEvents(&m_EventQueue);
         m_Input.PostEvents(&m_EventQueue);
-        m_Networker.PostEvents(&m_EventQueue);
+        m_Networker.PostGameEvents(&m_EventQueue);
 
         // Process events
         Event event = m_EventQueue.GetNextEvent();

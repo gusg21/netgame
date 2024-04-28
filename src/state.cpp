@@ -13,15 +13,18 @@ void net::State::HandleEvents(net::EventQueue* events)
 {
     events->ResetEventReadHead();
     for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
-        if (m_Actors[i] != nullptr) {
-            Event event = events->GetNextEvent();
-            while (event.Type != EVENT_NONE_EVENT) {
-                if (m_Actors[i]->HandleEvent(event)) {
-                    events->HandleThisEvent();
+        Actor* actor = m_Actors[i];
+        if (actor != nullptr) {
+            if (actor->IsAlive()) {
+                Event event = events->GetNextEvent();
+                while (event.Type != EVENT_NONE_EVENT) {
+                    if (actor->HandleEvent(event)) {
+                        events->HandleThisEvent();
+                    }
+                    event = events->GetNextEvent();
                 }
-                event = events->GetNextEvent();
+                events->ResetEventReadHead();
             }
-            events->ResetEventReadHead();
         }
     }
 }
@@ -29,16 +32,20 @@ void net::State::HandleEvents(net::EventQueue* events)
 void net::State::PreUpdate(float deltaSeconds)
 {
     for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
-        if (m_Actors[i] != nullptr)
-            m_Actors[i]->PreUpdate(deltaSeconds);
+        Actor* actor = m_Actors[i];
+        if (actor != nullptr)
+            if (actor->IsAlive())
+                actor->PreUpdate(deltaSeconds);
     }
 }
 
 void net::State::Update(float deltaSeconds)
 {
     for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
-        if (m_Actors[i] != nullptr)
-            m_Actors[i]->Update(deltaSeconds);
+        Actor* actor = m_Actors[i];
+        if (actor != nullptr)
+            if (actor->IsAlive())
+                actor->Update(deltaSeconds);
     }
     m_FrameNumber++;
     m_ElapsedTime += deltaSeconds;
@@ -47,8 +54,20 @@ void net::State::Update(float deltaSeconds)
 void net::State::Draw(net::Renderer* renderer)
 {
     for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
-        if (m_Actors[i] != nullptr)
-            m_Actors[i]->Draw(renderer);
+        Actor* actor = m_Actors[i];
+        if (actor != nullptr)
+            if (actor->IsAlive())
+                actor->Draw(renderer);
+    }
+}
+
+void net::State::DrawUI(net::Renderer* renderer)
+{
+    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
+        Actor* actor = m_Actors[i];
+        if (actor != nullptr)
+            if (actor->IsAlive())
+                actor->DrawUI(renderer);
     }
 }
 
@@ -58,11 +77,5 @@ void net::State::AddActor(Actor* actor)
     m_NextActorIndex++;
 
     actor->SetState(this);
-}
-void net::State::DrawUI(net::Renderer* renderer)
-{
-    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
-        if (m_Actors[i] != nullptr)
-            m_Actors[i]->DrawUI(renderer);
-    }
+    actor->Revive();
 }

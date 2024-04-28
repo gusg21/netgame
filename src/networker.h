@@ -8,14 +8,24 @@
 #include "../actor.h"
 #include "../simplesock/socklib.h"
 
+#define NET_NONE_EVENT 0
+#define NET_JOIN_LOBBY_EVENT 1
+#define NET_REQUEST_LOBBY_NAMES 2
+
 namespace net {
+struct ServerEvent {
+    unsigned char EventType;
+    char Data[255] = { 0 };
+};
+
 class Networker {
 public:
     Networker();
-    Networker(Networker& other) = delete;
-    void operator=(const Networker&) = delete;
+    Networker(net::Networker& other) = delete;
+    void operator=(const net::Networker&) = delete;
 
-    void PostEvents(EventQueue* queue);
+    void PostGameEvents(net::EventQueue* queue);
+    void SendServerEvent(net::ServerEvent event);
 
 private:
     Socket* m_Socket;

@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "renderer.h"
+#include "../state.h" // May eventually not be a sustainable relationship
 
 namespace net {
 class State;
@@ -28,9 +29,12 @@ public:
     virtual void DrawUI(net::Renderer* renderer) {};
 
     [[nodiscard]] bool IsAlive() const { return m_Alive; }
+    void Revive() { m_Alive = true; }
+    void Kill() { m_Alive = false; }
 
 protected:
     [[nodiscard]] net::State* GetState() const { return m_State; }
+    [[nodiscard]] net::Game* GetGame() const { return m_State->GetGame(); } // The only reason we need the class def for State
 
 private:
     net::State* m_State = nullptr;

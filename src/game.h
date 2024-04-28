@@ -21,6 +21,8 @@ public:
     net::State* NewState();
     void RunGame(net::State* initialState);
 
+    [[nodiscard]] net::Networker* GetNetworker() /* const */ { return &m_Networker; }
+
 private:
     net::Networker m_Networker;
     net::Renderer m_Renderer;
