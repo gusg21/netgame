@@ -93,7 +93,7 @@ class Game():
         self.game_print("Setting up play...")
         self._cards.clear()
         for _ in range(10):
-            self._cards.append(Card(random.randint(1, 10), random.randrange(-500, 500), random.randrange(-300, 300)))
+            self._cards.append(Card(random.randint(1, 10), random.randrange(-200, 200), random.randrange(-100, 100)))
 
     def get_cards(self) -> list[Card]:
         return self._cards

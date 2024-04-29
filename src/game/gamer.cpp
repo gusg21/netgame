@@ -22,10 +22,13 @@ bool net::Gamer::HandleEvent(net::Event event)
     if (event.Type == EVENT_CARD_STATE_EVENT) {
         for (uint32_t i = 0; i < EVENT_MAX_NUM_CARD_STATES; i++) {
             CardState* state = &event.Data.AsCardStateEvent.States[i];
-            printf("id=%d, value=%d, pos=(%f,%f)\n", state->Id, state->Value, state->X, state->Y);
-            m_Cards[i].SetId(state->Id);
-            m_Cards[i].SetValue(state->Value);
-            m_Cards[i].SetPosition(state->X, state->Y);
+            //printf("id=%d, value=%d, pos=(%f,%f)\n", state->Id, state->Value, state->X, state->Y);
+            if (m_Cards[i].IsIdle()) {
+                m_Cards[i].SetId(state->Id);
+                m_Cards[i].SetValue(state->Value);
+                m_Cards[i].SetPosition(state->X, state->Y);
+            }
+            
         }
     }
     return false;

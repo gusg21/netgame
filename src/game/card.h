@@ -50,6 +50,7 @@ public:
 
     net::Rectangle GetRectangle();
     bool IsReal() { return m_Id != 0; }
+    bool IsIdle() { return !m_Dragging; }
 
     static net::Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
 
