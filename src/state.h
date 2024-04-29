@@ -14,6 +14,7 @@ class State {
 public:
     State();
 
+    void Initialize(net::Game* game);
     void HandleEvents(net::EventQueue* events);
     void PreUpdate(float deltaSeconds);
     void Update(float deltaSeconds);

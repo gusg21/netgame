@@ -37,6 +37,7 @@ public:
 
     float GetTextWidth(const char* text, int32_t fontSize);
     float GetTextHeight(const char* text, int32_t fontSize);
+    net::Vec2 ScreenToWorld(net::Vec2 screenPoint);
 
     void PostEvents(EventQueue* queue);
     void Begin();

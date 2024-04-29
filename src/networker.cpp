@@ -6,11 +6,6 @@
 
 #include "eventqueue.h"
 
-#define NET_NONE_EVENT 0
-#define NET_QUIT_EVENT 1
-#define NET_ACK_JOIN_EVENT 2
-#define NET_LIST_LOBBY_NAMES_EVENT 3
-
 net::Networker::Networker()
 {
     SockLibInit();
@@ -27,23 +22,33 @@ void net::Networker::PostGameEvents(EventQueue* queue)
     if (bytesRecvd > 0) {
         char* packetStart = buffer;
 
-        char packetType = *(packetStart + 0);
+        unsigned char packetType = *(packetStart + 0);
 
         while (packetType != NET_NONE_EVENT) {
-            char packetDataLength = *(packetStart + 1);
+            unsigned char packetDataLength = *(packetStart + 1);
             char* packetData = packetStart + 2;
 
             printf("NETWORKER: INFO: Incoming packet type %d, len %d\n", packetType, packetDataLength);
             switch (packetType) {
-            case NET_QUIT_EVENT:
+            case NET_CLIENT_QUIT_EVENT:
                 queue->PostEvent({ .Type = EVENT_QUIT_EVENT });
                 break;
-            case NET_ACK_JOIN_EVENT:
+            case NET_CLIENT_ACK_JOIN_EVENT:
                 queue->PostEvent({ .Type = EVENT_ACK_JOIN_EVENT });
                 break;
-            case NET_LIST_LOBBY_NAMES_EVENT: {
+            case NET_CLIENT_LIST_LOBBY_NAMES_EVENT: {
                 Event event = { .Type = EVENT_LIST_LOBBY_NAMES_EVENT };
                 memcpy(event.Data.AsListLobbyNamesEvent.names, packetData, 255);
+                queue->PostEvent(event);
+                break;
+            }
+            case NET_CLIENT_START_GAME:
+                queue->PostEvent({ .Type = EVENT_START_GAME_EVENT });
+                break;
+            case NET_CLIENT_CARD_STATE: {
+                Event event {};
+                event.Type = EVENT_CARD_STATE_EVENT;
+                memcpy(event.Data.AsCardStateEvent.States, packetData, packetDataLength); // Works?
                 queue->PostEvent(event);
                 break;
             }

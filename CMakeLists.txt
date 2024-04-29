@@ -37,6 +37,7 @@ add_executable(netgame
         src/rectangle.h
         src/vec2.h
         src/texture.cpp
+        src/game/gamer.cpp
 
 
  "src/texture.h" "src/lobby/lobby.h")

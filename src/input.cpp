@@ -13,7 +13,7 @@ void net::Input::PostEvents(net::EventQueue* queue)
         if (readable || charCode == 0x08) { // 0x08 = backspace
             queue->PostEvent(Event {
                 .Type = EVENT_CHAR_EVENT,
-                .Data = { .AsCharEvent = CharEvent { .Char = (char)charCode } } });
+                .Data = { .AsCharEvent = CharEventData { .Char = (char)charCode } } });
         }
 
         charCode = ::GetCharPressed();
@@ -27,7 +27,7 @@ void net::Input::PostEvents(net::EventQueue* queue)
         if (nowPressed != wasPressed) {
             queue->PostEvent(Event {
                 .Type = EVENT_KEY_EVENT,
-                .Data = { .AsKeyEvent = KeyEvent { .Key = (net::KeyCode)keyCode, .Pressed = nowPressed } } });
+                .Data = { .AsKeyEvent = KeyEventData { .Key = (net::KeyCode)keyCode, .Pressed = nowPressed } } });
         }
         
         m_PrevKeys[keyCode] = nowPressed;

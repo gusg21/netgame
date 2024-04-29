@@ -73,6 +73,12 @@ float net::Renderer::GetTextHeight(const char* text, int32_t fontSize)
     return ::MeasureTextEx(GetFontDefault(), text, fontSize, 1.f).y;
 }
 
+net::Vec2 net::Renderer::ScreenToWorld(net::Vec2 screenPoint)
+{
+    ::Vector2 worldPoint = ::GetScreenToWorld2D({ screenPoint.X, screenPoint.Y }, m_Camera);
+    return { worldPoint.x, worldPoint.y };
+}
+
 void net::Renderer::PostEvents(net::EventQueue* queue)
 {
     if (WindowShouldClose())

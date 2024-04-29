@@ -33,18 +33,37 @@ enum class CardSuit {
 
 class Card : public Actor {
 public:
+    Card();
     Card(CardValue value, CardSuit suit);
 
+    bool HandleEvent(net::Event event) override;
     void Update(float deltaSeconds) override;
     void Draw(net::Renderer* renderer) override;
+
+    float GetX() { return m_X; }
+    float GetY() { return m_Y; }
+    void SetPosition(float x, float y);
+    uint32_t GetValue() { return (uint32_t)m_Value; }
+    void SetValue(uint32_t value);
+    uint32_t GetId() { return m_Id; }
+    void SetId(uint32_t id);
+
+    net::Rectangle GetRectangle();
+    bool IsReal() { return m_Id != 0; }
 
     static net::Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
 
 private:
     Texture m_CardsTexture;
 
-    CardValue m_Value;
-    CardSuit m_Suit;
+    CardValue m_Value = CardValue::EIGHT;
+    CardSuit m_Suit = CardSuit::DIAMONDS;
+
+    bool m_MouseOver = false;
+    bool m_Dragging = false;
+
+    float m_X = 0.f, m_Y = 0.f;
+    uint32_t m_Id = 0;
 };
 }
 

@@ -6,8 +6,10 @@
 #include <vector>
 
 #include "actor.h"
+
 #include "game.h"
-#include "game/card.h"
+#include "game/gamer.h"
+
 #include "lobby/button.h"
 #include "lobby/nameentry.h"
 #include "lobby/lobby.h"
@@ -17,17 +19,19 @@
 
 int main()
 {
-    net::Game* game = new net::Game({ .WindowWidth = 1600, .WindowHeight = 900, .WindowTitle = "Hello" });
+    net::Game* game = new net::Game({ .WindowWidth = 900, .WindowHeight = 600, .WindowTitle = "Hello" });
 
     net::State* gameState = game->NewState();
-    gameState->AddActor(new net::Card(net::CardValue::FIVE, net::CardSuit::CLUBS));
+    gameState->AddActor(new net::Gamer());
 
     net::State* lobbyState = game->NewState();
-    net::Button* button = new net::Button("Hello", { 10, 70, 100, 30 });
+    net::Button* button = new net::Button("Join Lobby", { 10, 70, 100, 30 });
+    net::Button* startButton = new net::Button("Begin Game", { 160, 10, 200, 70 });
     net::NameEntry* entry = new net::NameEntry();
-    net::Lobby* lobby = new net::Lobby(button, entry);
+    net::Lobby* lobby = new net::Lobby(button, startButton, entry, gameState);
     lobbyState->AddActor(entry);
     lobbyState->AddActor(button);
+    lobbyState->AddActor(startButton);
     lobbyState->AddActor(lobby);
 
     game->RunGame(lobbyState);

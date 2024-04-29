@@ -23,5 +23,10 @@ struct Color8 {
     {                      \
         100, 110, 240, 255 \
     }
+#define C8RED              \
+    Color8                 \
+    {                      \
+        240, 110, 100, 255 \
+    }
 
 #endif // NETGAME_COLOR_H

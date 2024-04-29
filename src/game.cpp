@@ -21,10 +21,17 @@ net::State* net::Game::NewState()
     return state;
 }
 
+void net::Game::ChangeState(net::State* state)
+{
+    m_NextState = state;
+}
+
 void net::Game::RunGame(net::State* initialState)
 {
     m_CurrentState = initialState;
     uint32_t frameNumber = 0;
+
+    m_CurrentState->Initialize(this);
 
     bool shouldQuit = false;
     while (!shouldQuit) {
@@ -67,6 +74,13 @@ void net::Game::RunGame(net::State* initialState)
         m_Renderer.End();
 
         m_Renderer.Present();
+
+        // Switch game state
+        if (m_NextState != nullptr) {
+            m_CurrentState = m_NextState;
+            m_CurrentState->Initialize(this);
+            m_NextState = nullptr;
+        }
 
         frameNumber++;
     }

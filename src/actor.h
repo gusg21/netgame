@@ -22,11 +22,12 @@ public:
 
     void SetState(net::State* state) { m_State = state; }
 
-    virtual bool HandleEvent(net::Event event) { return false; };
-    virtual void PreUpdate(float deltaSeconds) {};
-    virtual void Update(float deltaSeconds) {};
-    virtual void Draw(net::Renderer* renderer) {};
-    virtual void DrawUI(net::Renderer* renderer) {};
+    virtual void Initialize(net::State* state) { SetState(state); }
+    virtual bool HandleEvent(net::Event event) { return false; }
+    virtual void PreUpdate(float deltaSeconds) {}
+    virtual void Update(float deltaSeconds) {}
+    virtual void Draw(net::Renderer* renderer) {}
+    virtual void DrawUI(net::Renderer* renderer) {}
 
     [[nodiscard]] bool IsAlive() const { return m_Alive; }
     void Revive() { m_Alive = true; }

@@ -6,7 +6,17 @@ net::State::State()
     : m_Actors()
     , m_NextActorIndex(0)
     , m_Valid(false)
+    , m_Game(nullptr)
 {
+}
+
+void net::State::Initialize(net::Game* game)
+{
+    for (uint32_t i = 0; i < STATE_MAX_ACTORS; i++) {
+        Actor* actor = m_Actors[i];
+        if (actor != nullptr)
+            actor->Initialize(this);
+    }
 }
 
 void net::State::HandleEvents(net::EventQueue* events)
@@ -76,6 +86,5 @@ void net::State::AddActor(Actor* actor)
     m_Actors[m_NextActorIndex] = actor;
     m_NextActorIndex++;
 
-    actor->SetState(this);
     actor->Revive();
 }
