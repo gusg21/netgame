@@ -14,6 +14,8 @@
 #include "lobby/nameentry.h"
 #include "lobby/lobby.h"
 
+#include "finish/finish.h"
+
 #define WINDOW_WIDTH 1600
 #define WINDOW_HEIGHT 900
 
@@ -21,10 +23,16 @@ int main()
 {
     net::Game* game = new net::Game({ .WindowWidth = 900, .WindowHeight = 600, .WindowTitle = "Hello" });
 
-    net::State* gameState = game->NewState();
-    gameState->AddActor(new net::Gamer());
-
     net::State* lobbyState = game->NewState();
+
+    net::Button* returnButton = new net::Button("Game Over! Click to return to lobby", { 10, 10, 300, 100});
+    net::State* finishState = game->NewState();
+    finishState->AddActor(returnButton);
+    finishState->AddActor(new net::Finish(lobbyState, returnButton));
+
+    net::State* gameState = game->NewState();
+    gameState->AddActor(new net::Gamer(finishState));
+    
     net::Button* button = new net::Button("Join Lobby", { 10, 70, 100, 30 });
     net::Button* startButton = new net::Button("Begin Game", { 160, 10, 200, 70 });
     net::NameEntry* entry = new net::NameEntry();

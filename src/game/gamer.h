@@ -15,7 +15,7 @@ namespace net {
 
 class Gamer : public Actor {
 public:
-    Gamer();
+    Gamer(net::State* state);
 
     void Initialize(net::State* state) override;
     bool HandleEvent(net::Event event) override;
@@ -25,6 +25,7 @@ public:
 
 private:
     std::array<net::Card, EVENT_MAX_NUM_CARD_STATES> m_Cards;
+    net::State* m_State;
 };
 }
 

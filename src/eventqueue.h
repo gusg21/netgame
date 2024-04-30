@@ -59,6 +59,30 @@ struct CardStateEventData {
 };
 #define EVENT_CARD_STATE_EVENT 9
 
+struct AllowCardMoveEventData {
+    char CardId;
+};
+#define EVENT_ALLOW_CARD_MOVE_EVENT 10
+
+struct FinishCardMoveEventData {
+    char CardId;
+};
+#define EVENT_FINISH_CARD_MOVE_EVENT 11
+
+struct CardsCombinedEventData {
+    float X, Y;
+};
+#define EVENT_CARDS_COMBINED_EVENT 12
+
+struct GameFinishInfo {
+    char Name[16];
+    uint32_t Score;
+};
+struct GameFinishedData {
+    GameFinishInfo Infos[4];
+};
+#define EVENT_GAME_FINISHED 13
+
 struct CustomEventData {
     void* Data;
 };
@@ -71,6 +95,9 @@ union EventData {
     MouseButtonEventData AsMouseButtonEvent;
     ListLobbyNamesEventData AsListLobbyNamesEvent;
     CardStateEventData AsCardStateEvent;
+    AllowCardMoveEventData AsAllowCardMoveEvent;
+    FinishCardMoveEventData AsFinishCardMoveEvent;
+    CardsCombinedEventData AsCardsCombinedEvent;
 
     CustomEventData AsCustomEvent;
 

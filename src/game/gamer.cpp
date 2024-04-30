@@ -1,10 +1,13 @@
 #include "gamer.h"
 
+#include "combineparts.h"
+
 #include "../game.h"
 #include "../networker.h"
 
-net::Gamer::Gamer() 
+net::Gamer::Gamer(net::State* lobbyState) 
     : m_Cards()
+    , m_State(lobbyState)
 {
 }
 
@@ -30,6 +33,13 @@ bool net::Gamer::HandleEvent(net::Event event)
             }
             
         }
+    }
+    if (event.Type == EVENT_CARDS_COMBINED_EVENT) {
+        GetState()->AddActor(new CombineParts(event.Data.AsCardsCombinedEvent.X, event.Data.AsCardsCombinedEvent.Y));
+        return true;
+    }
+    if (event.Type == EVENT_GAME_FINISHED) {
+        GetGame()->ChangeState(m_State);
     }
     return false;
 }

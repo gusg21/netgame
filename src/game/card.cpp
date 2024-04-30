@@ -13,6 +13,7 @@
 net::Card::Card()
     : m_CardsTexture("assets/cards.png")
 {
+    m_Suit = (net::CardSuit)(rand() % 4);
 }
 
 net::Card::Card(net::CardValue value, net::CardSuit suit)
@@ -43,10 +44,24 @@ bool net::Card::HandleEvent(net::Event event)
     }
     if (event.Type == EVENT_MOUSE_BUTTON_EVENT) {
         if (m_MouseOver && event.Data.AsMouseButtonEvent.Button == MouseButton::LEFT && event.Data.AsMouseButtonEvent.Pressed) {
-            m_Dragging = true;
+            char cardId = m_Id;
+            GetGame()->GetNetworker()->SendServerEvent({ .EventType = NET_SERVER_PICK_UP_CARD, .Data = { cardId } });
             return true;
         }
         if (m_Dragging && event.Data.AsMouseButtonEvent.Button == MouseButton::LEFT && !event.Data.AsMouseButtonEvent.Pressed) {
+            char cardId = m_Id;
+            GetGame()->GetNetworker()->SendServerEvent({ .EventType = NET_SERVER_PUT_DOWN_CARD, .Data = { cardId } });
+            return true;
+        }
+    }
+    if (event.Type == EVENT_ALLOW_CARD_MOVE_EVENT) {
+        if (event.Data.AsAllowCardMoveEvent.CardId == m_Id && !m_Dragging) {
+            m_Dragging = true;
+            return true;
+        }
+    }
+    if (event.Type == EVENT_FINISH_CARD_MOVE_EVENT) {
+        if (event.Data.AsFinishCardMoveEvent.CardId == m_Id && m_Dragging) {
             m_Dragging = false;
             return true;
         }

@@ -51,7 +51,7 @@ void net::Lobby::Update(float deltaSeconds)
 {
     if (m_JoinButton->WasPressed() && *m_NameEntry->GetName() != '\0') {
         ServerEvent event = {
-            .EventType = NET_SERVER_JOIN_LOBBY_EVENT
+            .EventType = NET_SERVER_JOIN_LOBBY
         };
         memcpy(event.Data, m_NameEntry->GetName(), 254);
         GetGame()->GetNetworker()->SendServerEvent(event);

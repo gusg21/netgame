@@ -30,13 +30,13 @@ void net::Networker::PostGameEvents(EventQueue* queue)
 
             printf("NETWORKER: INFO: Incoming packet type %d, len %d\n", packetType, packetDataLength);
             switch (packetType) {
-            case NET_CLIENT_QUIT_EVENT:
+            case NET_CLIENT_QUIT:
                 queue->PostEvent({ .Type = EVENT_QUIT_EVENT });
                 break;
-            case NET_CLIENT_ACK_JOIN_EVENT:
+            case NET_CLIENT_ACK_JOIN:
                 queue->PostEvent({ .Type = EVENT_ACK_JOIN_EVENT });
                 break;
-            case NET_CLIENT_LIST_LOBBY_NAMES_EVENT: {
+            case NET_CLIENT_LIST_LOBBY_NAMES: {
                 Event event = { .Type = EVENT_LIST_LOBBY_NAMES_EVENT };
                 memcpy(event.Data.AsListLobbyNamesEvent.names, packetData, 255);
                 queue->PostEvent(event);
@@ -49,6 +49,28 @@ void net::Networker::PostGameEvents(EventQueue* queue)
                 Event event {};
                 event.Type = EVENT_CARD_STATE_EVENT;
                 memcpy(event.Data.AsCardStateEvent.States, packetData, packetDataLength); // Works?
+                queue->PostEvent(event);
+                break;
+            }
+            case NET_CLIENT_ALLOW_CARD_MOVE: {
+                Event event {};
+                event.Type = EVENT_ALLOW_CARD_MOVE_EVENT;
+                event.Data.AsAllowCardMoveEvent.CardId = packetData[0];
+                queue->PostEvent(event);
+                break;
+            }
+            case NET_CLIENT_FINISH_CARD_MOVE: {
+                Event event {};
+                event.Type = EVENT_FINISH_CARD_MOVE_EVENT;
+                event.Data.AsFinishCardMoveEvent.CardId = packetData[0];
+                queue->PostEvent(event);
+                break;
+            }
+            case NET_CLIENT_CARDS_COMBINED: {
+                Event event {};
+                event.Type = EVENT_CARDS_COMBINED_EVENT;
+                event.Data.AsCardsCombinedEvent.X = *(float*)&packetData[0];
+                event.Data.AsCardsCombinedEvent.Y = *(float*)&packetData[sizeof(float)];
                 queue->PostEvent(event);
                 break;
             }

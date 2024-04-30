@@ -40,7 +40,8 @@ add_executable(netgame
         src/game/gamer.cpp
 
 
- "src/texture.h" "src/lobby/lobby.h")
+ "src/texture.h" "src/lobby/lobby.h"
+src/game/combineparts.h src/game/combineparts.cpp "src/finish/finish.h")
 
 if (WIN32)
     target_sources(netgame PRIVATE "src/simplesock/socklib_win32.cpp")
