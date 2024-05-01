@@ -11,6 +11,7 @@ class PlayerData():
     def __init__(self, name: str = "UNKNOWN PLAYER") -> None:
         self.name = name
         self.joined: bool = False
+        self.socket: socket.socket = None
 
 class GameState(enum.Enum):
     LOBBY = 0
@@ -39,10 +40,12 @@ class Card():
     def distance_to(self, other):
         return math.dist((self.x, self.y), (other.x, other.y))
 
+Address = tuple[str, int]
+
 class Game():
     def __init__(self) -> None:
         self.game_print("Game constructed.")
-        self._players: dict[socket.socket, PlayerData] = {}
+        self._players: dict[Address, PlayerData] = {}
         self._state: GameState = GameState.LOBBY
         self._cards: list[Card] = []
         self._combos: list[tuple[float, float]] = []
@@ -50,10 +53,11 @@ class Game():
     def game_print(self, text: object):
         print(f"{datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")}: GAME: " + str(text))
 
-    def add_player(self, socket: socket.socket) -> None:
-        self._players[socket] = PlayerData()
+    def add_player(self, add: Address, sock: socket.socket) -> None:
+        self._players[add] = PlayerData()
+        self._players[add].socket = sock
 
-    def remove_player(self, socket: socket.socket) -> None:
+    def remove_player(self, socket: Address) -> None:
         # print(self._players.keys())
         self._players.pop(socket)
 
@@ -61,10 +65,10 @@ class Game():
             self._state = GameState.LOBBY
             self.game_print("All players left; returning to LOBBY")
     
-    def has_player_with_socket(self, socket: socket) -> bool:
+    def has_player_with_socket(self, socket: Address) -> bool:
         return socket in self._players
 
-    def player_join(self, socket: socket.socket, name: str) -> bool:
+    def player_join(self, socket: Address, name: str) -> bool:
         if self.is_in_lobby():
             data = self._players[socket]
             data.name = name
@@ -73,7 +77,7 @@ class Game():
         else:
             return False
 
-    def get_player_name(self, socket: socket.socket) -> str | None:
+    def get_player_name(self, socket: Address) -> str | None:
         if socket in self._players:
             return self._players[socket].name
         return None
@@ -84,7 +88,7 @@ class Game():
     def get_player_count(self) -> int:
         return len([data for data in self._players.values() if data.joined])
     
-    def get_players(self) -> dict[socket.socket, PlayerData]:
+    def get_players(self) -> dict[Address, PlayerData]:
         return self._players
     
     def is_in_lobby(self) -> bool:
@@ -106,13 +110,13 @@ class Game():
     def get_cards(self) -> list[Card]:
         return self._cards
 
-    def update_card(self, id: int, x: float, y: float, player: socket.socket):
+    def update_card(self, id: int, x: float, y: float, player: Address):
         for card in self._cards:
             if card.id == id and card.owner == player:
                 card.x = x
                 card.y = y
     
-    def can_pick_up_card(self, id: int, player: socket.socket) -> bool:
+    def can_pick_up_card(self, id: int, player: Address) -> bool:
         if id == 0:
             self.game_print(f"Player {player} attempted to bick up NULL card")
             return False
@@ -123,20 +127,23 @@ class Game():
                     return True
         return False
 
-    def pick_up_card(self, id: int, player: socket.socket):
+    def pick_up_card(self, id: int, player: Address):
         if id == 0:
             return
         for card in self._cards:
             if card.id == id:
                 card.owner = player
     
-    def put_down_card(self, id: int, player: socket.socket):
+    def put_down_card(self, id: int, player: Address):
+        print([card.value for card in self._cards if card.id != 0])
+        print(f"{self.is_complete() = }")
         if id == 0:
             return 0
         for card in self._cards:
             if card.id == id:
                 if card.owner != player:
                     self.game_print("Different player attempting to release already held card!")
+                    card.owner = None
                 else:
                     card.owner = None
                     self.stack_cards()
@@ -163,6 +170,7 @@ class Game():
                     avg_x = (card.x + other_card.x) / 2.0
                     avg_y = (card.y + other_card.y) / 2.0
                     other_card.id = 0
+                    other_card.owner = None 
                     card.x = avg_x
                     card.y = avg_y
                     self._combos.append((avg_x, avg_y))
@@ -180,9 +188,10 @@ class Game():
     
     def finish_game(self):
         self._state = GameState.FINISH
-        self._players.clear()
+        for player in self._players:
+            self._players[player].joined = False
 
-    def get_player_score(self, player: socket.socket) -> int:
+    def get_player_score(self, player: Address) -> int:
         return 0
 
     def get_game_finished_data(self) -> bytearray:

@@ -26,7 +26,7 @@ bool net::Gamer::HandleEvent(net::Event event)
         for (uint32_t i = 0; i < EVENT_MAX_NUM_CARD_STATES; i++) {
             CardState* state = &event.Data.AsCardStateEvent.States[i];
             //printf("id=%d, value=%d, pos=(%f,%f)\n", state->Id, state->Value, state->X, state->Y);
-            if (m_Cards[i].IsIdle()) {
+            if (!m_Cards[i].IsHeld()) {
                 m_Cards[i].SetId(state->Id);
                 m_Cards[i].SetValue(state->Value);
                 m_Cards[i].SetPosition(state->X, state->Y);
@@ -36,6 +36,10 @@ bool net::Gamer::HandleEvent(net::Event event)
     }
     if (event.Type == EVENT_CARDS_COMBINED_EVENT) {
         GetState()->AddActor(new CombineParts(event.Data.AsCardsCombinedEvent.X, event.Data.AsCardsCombinedEvent.Y));
+        for (uint32_t i = 0; i < EVENT_MAX_NUM_CARD_STATES; i++) {
+            m_Cards[i].Drop();
+        }
+        
         return true;
     }
     if (event.Type == EVENT_GAME_FINISHED) {

@@ -13,25 +13,25 @@ class ClientHandler(socketserver.BaseRequestHandler):
     def construct_the_game() -> None:
         ClientHandler._game = Game()
 
-    def broadcast(packet: ClientPacket) -> None:
-        for player_sock, data in ClientHandler._game.get_players().items():
-            if data.joined:
-                player_sock.send(packet.to_bytes())
+    def broadcast(packet: ClientPacket, join_exclusive = True) -> None:
+        for player_add, data in ClientHandler._game.get_players().items():
+            if data.joined or not join_exclusive:
+                data.socket.send(packet.to_bytes())
 
     def get_the_game(self) -> Game:
         return ClientHandler._game
 
     def client_print(self, text: object):
-        print(f"{datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")}: {ClientHandler._game.get_player_name(self.request)}: " + str(text))
+        print(f"{datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")}: {ClientHandler._game.get_player_name(self.client_address)}: " + str(text))
 
     def process_server_packet(self, packet: ServerPacket) -> list[ClientPacket] | ClientPacket | None:
         # Debug Info
-        my_name = self.get_the_game().get_player_name(self.request)
+        my_name = self.get_the_game().get_player_name(self.client_address)
         if my_name:
             # print(f"Packet from {my_name = }")
             pass
         else:
-            self.get_the_game().add_player(self.request)
+            self.get_the_game().add_player(self.client_address, self.request)
             self.client_print(f"New socket incoming from {self.client_address = }")
 
         # Handle packet event
@@ -41,7 +41,7 @@ class ClientHandler(socketserver.BaseRequestHandler):
             case ServerEvent.CLIENT_JOIN:
                 name = packet.get_data().decode().replace("\0", "").strip()
                 self.client_print(f"Client joining ({name = })")
-                if self.get_the_game().player_join(self.request, name):
+                if self.get_the_game().player_join(self.client_address, name):
                     return ClientPacket(ClientEvent.ACK_JOIN)
                 else:
                     self.client_print("Can't join game.")
@@ -64,10 +64,10 @@ class ClientHandler(socketserver.BaseRequestHandler):
             case ServerEvent.PICK_UP_CARD:
                 card_id = packet.get_data()[0]
                 self.client_print(f"Picking up card {card_id=}")
-                if self.get_the_game().can_pick_up_card(card_id, self.request):
+                if self.get_the_game().can_pick_up_card(card_id, self.client_address):
                     raw_data = bytearray()
                     raw_data.append(card_id)
-                    self.get_the_game().pick_up_card(card_id, self.request)
+                    self.get_the_game().pick_up_card(card_id, self.client_address)
                     return ClientPacket(ClientEvent.ALLOW_CARD_MOVE, data=raw_data)
                 else:
                     return None
@@ -75,19 +75,19 @@ class ClientHandler(socketserver.BaseRequestHandler):
                 card_id = packet.get_data()[0]
                 raw_data = bytearray()
                 raw_data.append(card_id)
-                self.get_the_game().put_down_card(card_id, self.request)
+                self.get_the_game().put_down_card(card_id, self.client_address)
                 pack = ClientPacket(ClientEvent.FINISH_CARD_MOVE, data=raw_data)
                 for combo in self.get_the_game().get_card_combos():
                     combo_data = bytearray()
                     combo_data.extend(struct.pack("ff", combo[0], combo[1]))
                     ClientHandler.broadcast(ClientPacket(ClientEvent.CARDS_COMBINED, data=combo_data))
                 if self.get_the_game().is_complete():
-                    ClientHandler.broadcast(ClientPacket(ClientEvent.GAME_FINISHED, data=self.get_the_game().get_game_finished_data()))
                     self.get_the_game().finish_game()
+                    ClientHandler.broadcast(ClientPacket(ClientEvent.GAME_FINISHED, data=self.get_the_game().get_game_finished_data()), False)
                 return pack
             case ServerEvent.MOVE_CARD:
                 id, x, y = struct.unpack("Iff", packet.get_data()[:12])
-                self.get_the_game().update_card(id, x, y, self.request)
+                self.get_the_game().update_card(id, x, y, self.client_address)
                 return None
             case _:
                 self.client_print(f"Can't handle packet of event {packet.get_event() = }")
@@ -122,7 +122,7 @@ class ClientHandler(socketserver.BaseRequestHandler):
                 
 
     def finish(self):
-        ClientHandler._game.remove_player(self.request)
+        ClientHandler._game.remove_player(self.client_address)
 
 class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer): pass
 

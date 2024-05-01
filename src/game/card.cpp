@@ -10,6 +10,8 @@
 #define CARD_WIDTH 48.f
 #define CARD_HEIGHT 64.f
 
+net::Card* net::Card::s_HeldCard = nullptr;
+
 net::Card::Card()
     : m_CardsTexture("assets/cards.png")
 {
@@ -26,10 +28,13 @@ net::Card::Card(net::CardValue value, net::CardSuit suit)
 bool net::Card::HandleEvent(net::Event event)
 {
     if (event.Type == EVENT_MOUSE_MOTION_EVENT) {
+        if (!IsReal())
+            return false;
+
         net::Vec2 mousePos = { event.Data.AsMouseMotionEvent.X, event.Data.AsMouseMotionEvent.Y };
         net::Vec2 worldPos = GetGame()->GetRenderer()->ScreenToWorld(mousePos);
 
-        if (!m_Dragging) {
+        if (!IsHeld()) {
             if (GetRectangle().ContainsPoint(worldPos)) {
                 m_MouseOver = true;
             } else {
@@ -43,26 +48,39 @@ bool net::Card::HandleEvent(net::Event event)
         
     }
     if (event.Type == EVENT_MOUSE_BUTTON_EVENT) {
+        if (!IsReal())
+            return false;
+
         if (m_MouseOver && event.Data.AsMouseButtonEvent.Button == MouseButton::LEFT && event.Data.AsMouseButtonEvent.Pressed) {
-            char cardId = m_Id;
-            GetGame()->GetNetworker()->SendServerEvent({ .EventType = NET_SERVER_PICK_UP_CARD, .Data = { cardId } });
-            return true;
+            if (s_HeldCard == nullptr) {
+                char cardId = m_Id;
+                GetGame()->GetNetworker()->SendServerEvent({ .EventType = NET_SERVER_PICK_UP_CARD, .Data = { cardId } });
+                return true;
+            }
         }
-        if (m_Dragging && event.Data.AsMouseButtonEvent.Button == MouseButton::LEFT && !event.Data.AsMouseButtonEvent.Pressed) {
-            char cardId = m_Id;
-            GetGame()->GetNetworker()->SendServerEvent({ .EventType = NET_SERVER_PUT_DOWN_CARD, .Data = { cardId } });
-            return true;
+        if (IsHeld() && event.Data.AsMouseButtonEvent.Button == MouseButton::LEFT && !event.Data.AsMouseButtonEvent.Pressed) {
+            if (s_HeldCard == this) {
+                char cardId = m_Id;
+                GetGame()->GetNetworker()->SendServerEvent({ .EventType = NET_SERVER_PUT_DOWN_CARD, .Data = { cardId } });
+                return true;
+            }
         }
     }
     if (event.Type == EVENT_ALLOW_CARD_MOVE_EVENT) {
-        if (event.Data.AsAllowCardMoveEvent.CardId == m_Id && !m_Dragging) {
-            m_Dragging = true;
+        if (!IsReal())
+            return false;
+
+        if (event.Data.AsAllowCardMoveEvent.CardId == m_Id && !IsHeld()) {
+            s_HeldCard = this;
             return true;
         }
     }
     if (event.Type == EVENT_FINISH_CARD_MOVE_EVENT) {
-        if (event.Data.AsFinishCardMoveEvent.CardId == m_Id && m_Dragging) {
-            m_Dragging = false;
+        if (!IsReal())
+            return false;
+
+        if (event.Data.AsFinishCardMoveEvent.CardId == m_Id && IsHeld()) {
+            s_HeldCard = nullptr;
             return true;
         }
     }
@@ -71,7 +89,7 @@ bool net::Card::HandleEvent(net::Event event)
 
 void net::Card::Update(float deltaSeconds)
 {
-    if (m_Dragging && GetState()->GetFrameNumber() % 50 == 1) {
+    if (IsHeld() && GetState()->GetFrameNumber() % 50 == 1) {
         // Update server
         struct MoveCardEventData {
             uint32_t Id;
@@ -99,6 +117,12 @@ void net::Card::Draw(net::Renderer* renderer)
             renderer->DrawRectangleLines(GetRectangle(), C8RED);
         }
     }
+}
+
+void net::Card::Drop()
+{
+    s_HeldCard = nullptr;
+    m_MouseOver = false;
 }
 
 void net::Card::SetPosition(float x, float y)

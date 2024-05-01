@@ -48,20 +48,22 @@ public:
     uint32_t GetId() { return m_Id; }
     void SetId(uint32_t id);
 
+    void Drop();
     net::Rectangle GetRectangle();
     bool IsReal() { return m_Id != 0; }
-    bool IsIdle() { return !m_Dragging; }
+    bool IsHeld() { return s_HeldCard == this; }
 
     static net::Rectangle GetCardTexCoords(CardValue value, CardSuit suit);
 
 private:
+    static Card* s_HeldCard;
+
     Texture m_CardsTexture;
 
     CardValue m_Value = CardValue::EIGHT;
     CardSuit m_Suit = CardSuit::DIAMONDS;
 
     bool m_MouseOver = false;
-    bool m_Dragging = false;
 
     float m_X = 0.f, m_Y = 0.f;
     uint32_t m_Id = 0;
