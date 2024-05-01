@@ -100,7 +100,7 @@ class Game():
         self.game_print("Setting up play...")
         self._cards.clear()
         self._combos.clear()
-        for _ in range(2):
+        for _ in range(15):
             self._cards.append(Card(random.randint(1, 10), random.randrange(-100, 100), random.randrange(-100, 100)))
 
     def get_cards(self) -> list[Card]:
