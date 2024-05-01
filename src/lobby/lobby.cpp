@@ -15,7 +15,11 @@ net::Lobby::Lobby(net::Button* joinButton, net::Button* beginButton, net::NameEn
 
 void net::Lobby::Initialize(net::State* state)
 {
+    m_JoinButton->Revive();
     m_BeginButton->Kill();
+
+    m_Joined = false;
+    m_JoinedPlayerNames.clear();
 
     net::Actor::Initialize(state);
 }

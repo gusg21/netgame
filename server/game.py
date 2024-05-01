@@ -65,7 +65,7 @@ class Game():
         return socket in self._players
 
     def player_join(self, socket: socket.socket, name: str) -> bool:
-        if self._state == GameState.LOBBY:
+        if self.is_in_lobby():
             data = self._players[socket]
             data.name = name
             data.joined = True
@@ -88,7 +88,7 @@ class Game():
         return self._players
     
     def is_in_lobby(self) -> bool:
-        return self._state == GameState.LOBBY
+        return self._state == GameState.LOBBY or self._state == GameState.FINISH
 
     def is_in_game(self) -> bool:
         return self._state == GameState.GAME
@@ -180,3 +180,13 @@ class Game():
     
     def finish_game(self):
         self._state = GameState.FINISH
+        self._players.clear()
+
+    def get_player_score(self, player: socket.socket) -> int:
+        return 0
+
+    def get_game_finished_data(self) -> bytearray:
+        array = bytearray()
+        for player in self._players:
+            array.extend(struct.pack("16sI", self.get_player_name(player).encode(), self.get_player_score(player)))
+        return array

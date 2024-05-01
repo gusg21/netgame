@@ -74,6 +74,13 @@ void net::Networker::PostGameEvents(EventQueue* queue)
                 queue->PostEvent(event);
                 break;
             }
+            case NET_CLIENT_GAME_FINISHED: {
+                Event event {};
+                event.Type = EVENT_GAME_FINISHED;
+                memcpy(event.Data.AsGameFinishedEvent.Infos, packetData, EVENT_NUM_GAME_FINISH_INFOS * sizeof(GameFinishInfo));
+                queue->PostEvent(event);
+                break;
+            }
             default:
                 printf("NETWORKER: WARN: Unhandled packet type %d\n", packetType);
                 break;

@@ -74,12 +74,14 @@ struct CardsCombinedEventData {
 };
 #define EVENT_CARDS_COMBINED_EVENT 12
 
+#define EVENT_MAX_GAME_FINISH_INFO_NAME_LENGTH 16
 struct GameFinishInfo {
-    char Name[16];
+    char Name[EVENT_MAX_GAME_FINISH_INFO_NAME_LENGTH];
     uint32_t Score;
 };
-struct GameFinishedData {
-    GameFinishInfo Infos[4];
+#define EVENT_NUM_GAME_FINISH_INFOS 4
+struct GameFinishedEventData {
+    GameFinishInfo Infos[EVENT_NUM_GAME_FINISH_INFOS];
 };
 #define EVENT_GAME_FINISHED 13
 
@@ -98,6 +100,7 @@ union EventData {
     AllowCardMoveEventData AsAllowCardMoveEvent;
     FinishCardMoveEventData AsFinishCardMoveEvent;
     CardsCombinedEventData AsCardsCombinedEvent;
+    GameFinishedEventData AsGameFinishedEvent;
 
     CustomEventData AsCustomEvent;
 

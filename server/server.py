@@ -82,7 +82,7 @@ class ClientHandler(socketserver.BaseRequestHandler):
                     combo_data.extend(struct.pack("ff", combo[0], combo[1]))
                     ClientHandler.broadcast(ClientPacket(ClientEvent.CARDS_COMBINED, data=combo_data))
                 if self.get_the_game().is_complete():
-                    ClientHandler.broadcast(ClientPacket(ClientEvent.GAME_FINISHED))
+                    ClientHandler.broadcast(ClientPacket(ClientEvent.GAME_FINISHED, data=self.get_the_game().get_game_finished_data()))
                     self.get_the_game().finish_game()
                 return pack
             case ServerEvent.MOVE_CARD:

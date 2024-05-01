@@ -10,6 +10,7 @@ net::Finish::Finish(net::State* lobbyState, net::Button* returnButton)
 }
 void net::Finish::Initialize(net::State* state)
 {
+    net::Actor::Initialize(state);
 }
 
 bool net::Finish::HandleEvent(net::Event event)
